@@ -21,10 +21,15 @@ public class QueuesProject {
        QueueFrame frame= new QueueFrame();
        frame.setTitle("Queue problem solver");
        frame.setVisible(true);
-       
-       ScriptEngineManager arithmetic = new ScriptEngineManager();
-       ScriptEngine arithmetic_engine = arithmetic.getEngineByName("JavaScript");
-       double x = Double.valueOf(String.valueOf(arithmetic_engine.eval("1+2-1")));
     }
     
-}
+        
+//        for(start=start; start<=end; start++){
+//            summation= summation + term;
+//    }
+    
+    
+    
+      }
+    
+

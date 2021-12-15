@@ -56,71 +56,49 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lbl_customerNumber" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lbl_arrival" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="lbl_service" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="txt_service" min="-2" pref="96" max="-2" attributes="0"/>
-                                          <Component id="txt_arrival" min="-2" pref="96" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="btn_calculate" pref="104" max="32767" attributes="0"/>
+                                          <Component id="btn_graph" max="32767" attributes="0"/>
+                                          <Component id="btn_clearAll" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <Component id="lbl_initialCustomers" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lbl_capacity" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="lbl_time" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txt_time" min="-2" pref="96" max="-2" attributes="0"/>
-                                          <Component id="txt_capacity" min="-2" pref="96" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="296" max="-2" attributes="0"/>
-                                      <Component id="lbl_pplAtTime" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="btn_calculate" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="btn_graph" min="-2" pref="95" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="lbl_qWaitTime_M" alignment="1" max="32767" attributes="0"/>
-                                                      <Component id="lbl_qWaitTime" alignment="1" max="32767" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                          <Component id="txt_initialCustomers" min="-2" pref="98" max="-2" attributes="0"/>
+                                          <Component id="txt_customerNumber" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                              <Component id="txt_service" min="-2" pref="96" max="-2" attributes="0"/>
+                                              <Component id="txt_capacity" min="-2" pref="96" max="-2" attributes="0"/>
+                                              <Component id="txt_arrival" alignment="1" min="-2" pref="96" max="-2" attributes="0"/>
+                                              <Component id="txt_time" alignment="1" min="-2" pref="96" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
                               </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace pref="82" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_initialCustomers" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbl_customerNumber" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_balkTime" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lbl_qWaitTime_M" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="lbl_qWaitTime" alignment="1" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="lbl_pplAtTime" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txt_initialCustomers" pref="98" max="32767" attributes="0"/>
-                                  <Component id="txt_customerNumber" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -130,7 +108,7 @@
                           <Component id="txt_qWaitTime_M" alignment="0" max="32767" attributes="0"/>
                           <Component id="txt_balkTime" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="161" max="32767" attributes="0"/>
+                      <EmptySpace pref="71" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -158,36 +136,32 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lbl_capacity" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txt_capacity" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lbl_pplAtTime" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_pplAtTime" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lbl_qWaitTime_M" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_qWaitTime_M" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                      <Component id="btn_calculate" min="-2" pref="40" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                      <Component id="btn_graph" min="-2" pref="40" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbl_pplAtTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_pplAtTime" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbl_qWaitTime_M" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_qWaitTime_M" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lbl_qWaitTime" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txt_qWaitTime" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="btn_calculate" min="-2" pref="45" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btn_graph" min="-2" pref="45" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btn_clearAll" min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -196,7 +170,6 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lbl_initialCustomers" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txt_initialCustomers" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -207,7 +180,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_balkTime" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txt_balkTime" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -272,6 +245,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_graphMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_graphActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_pplAtTime">
@@ -300,6 +274,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_initialCustomers">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_initialCustomersKeyReleased"/>
               </Events>
@@ -314,16 +291,6 @@
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_customerNumberKeyReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="0 for infinite capacity"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="0 if none"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="lbl_qWaitTime_M">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Wq(M)="/>
@@ -331,12 +298,20 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txt_qWaitTime_M">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
+            <Component class="javax.swing.JLabel" name="lbl_balkTime">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ti ="/>
+                <Property name="text" type="java.lang.String" value="Balk time ="/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_balkTime">
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_clearAll">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Clear all"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_clearAllMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -353,25 +328,21 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lbl_mm1_service" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbl_mm1_arrival" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txt_mm1_arrival" pref="73" max="32767" attributes="0"/>
-                                  <Component id="txt_mm1_service" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                              <Component id="btn_mm1_calculate" min="-2" pref="119" max="-2" attributes="0"/>
-                          </Group>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lbl_mm1_service" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_mm1_arrival" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_mm1_calculate" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txt_mm1_arrival" pref="99" max="32767" attributes="0"/>
+                              <Component id="txt_mm1_service" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="btn_mm1_clearAll" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="97" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbl_mm1_Lq" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_mm1_L" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -379,13 +350,13 @@
                           <Component id="lbl_mm1_Wq" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txt_mm1_L" min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="txt_mm1_W" min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="txt_mm1_Lq" min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="txt_mm1_Wq" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txt_mm1_W" alignment="0" pref="100" max="32767" attributes="0"/>
+                          <Component id="txt_mm1_Wq" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txt_mm1_Lq" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txt_mm1_L" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="60" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -408,14 +379,18 @@
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                              <Component id="btn_mm1_calculate" min="-2" pref="39" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lbl_mm1_W" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txt_mm1_W" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btn_mm1_calculate" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="btn_mm1_clearAll" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -424,7 +399,7 @@
                           <Component id="lbl_mm1_Wq" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_mm1_Wq" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="205" max="32767" attributes="0"/>
+                      <EmptySpace pref="199" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -512,6 +487,15 @@
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mm1_WqKeyReleased"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="btn_mm1_clearAll">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Clear all"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_mm1_clearAllMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_mm1_clearAllActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="panel_MM1K">
@@ -527,9 +511,9 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="lbl_mm1k_service" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_mm1k_capacity" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -543,25 +527,26 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                               <Component id="btn_mm1k_calculate" min="-2" pref="108" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btn_mm1k_clearAll" min="-2" pref="108" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbl_mm1k_L" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_mm1k_Lq" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_mm1k_W" min="-2" max="-2" attributes="0"/>
-                          <Component id="Wq" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_mm1k_Wq" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txt_mm1k_W" alignment="0" pref="174" max="32767" attributes="0"/>
+                          <Component id="txt_mm1k_W" alignment="1" pref="152" max="32767" attributes="0"/>
+                          <Component id="txt_mm1k_L" alignment="1" max="32767" attributes="0"/>
                           <Component id="txt_mm1k_Lq" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txt_mm1k_L" max="32767" attributes="0"/>
-                          <Component id="txt_mm1k_Wq" max="32767" attributes="0"/>
+                          <Component id="txt_mm1k_Wq" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -592,8 +577,9 @@
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_mm1k_calculate" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                          <Component id="Wq" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_mm1k_Wq" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_mm1k_Wq" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_mm1k_clearAll" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="163" max="32767" attributes="0"/>
                   </Group>
@@ -637,6 +623,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_mm1k_calculateMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_mm1k_calculateActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_mm1k_L">
@@ -680,7 +667,7 @@
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mm1k_WKeyReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="Wq">
+            <Component class="javax.swing.JLabel" name="lbl_mm1k_Wq">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Expected wait time in the queue (Wq):"/>
               </Properties>
@@ -693,181 +680,13 @@
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mm1k_WqKeyReleased"/>
               </Events>
             </Component>
-          </SubComponents>
-        </Container>
-        <Container class="javax.swing.JPanel" name="panel_MMC">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="M/M/C">
-                <Property name="tabTitle" type="java.lang.String" value="M/M/C"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_mmc_service" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbl_mmc_arrival" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txt_mmc_arrival" max="32767" attributes="0"/>
-                                  <Component id="txt_mmc_service" pref="100" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_mmc_Lq" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbl_mmc_L" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                      <Component id="btn_mmc_calculate" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="lbl_mmc_servers" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                                      <Component id="txt_mmc_servers" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_mmc_W" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbl_mmc_Wq" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txt_mmc_L" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txt_mmc_Lq" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txt_mmc_W" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txt_mmc_Wq" alignment="0" pref="100" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="128" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl_mmc_arrival" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmc_arrival" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_mmc_L" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmc_L" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl_mmc_service" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmc_service" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_mmc_Lq" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmc_Lq" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl_mmc_W" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmc_W" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_mmc_servers" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmc_servers" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl_mmc_Wq" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmc_Wq" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_mmc_calculate" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="193" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="lbl_mmc_arrival">
+            <Component class="javax.swing.JButton" name="btn_mm1k_clearAll">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Mean arrival rate:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txt_mmc_arrival">
-              <Events>
-                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmc_arrivalKeyReleased"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lbl_mmc_service">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Mean service rate:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txt_mmc_service">
-              <Events>
-                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmc_serviceKeyReleased"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btn_mmc_calculate">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Calculate"/>
+                <Property name="text" type="java.lang.String" value="Clear all"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_mmc_calculateMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_mm1k_clearAllMouseClicked"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lbl_mmc_L">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Number of people in the system (L):"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lbl_mmc_Lq">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Number of people in the queue (Lq):"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lbl_mmc_W">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Expected wait time in the system (W):"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lbl_mmc_Wq">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Expected wait time in the queue (Wq):"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txt_mmc_L">
-              <Events>
-                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmc_LKeyReleased"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txt_mmc_Lq">
-              <Events>
-                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmc_LqKeyReleased"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txt_mmc_W">
-              <Events>
-                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmc_WKeyReleased"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txt_mmc_Wq">
-              <Events>
-                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmc_WqKeyReleased"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lbl_mmc_servers">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Servers:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txt_mmc_servers">
             </Component>
           </SubComponents>
         </Container>
@@ -883,11 +702,6 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                      <Component id="btn_mmck_calculate" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -903,12 +717,19 @@
                           <Component id="txt_mmck_service" max="32767" attributes="0"/>
                           <Component id="txt_mmck_arrival" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="162" max="32767" attributes="0"/>
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Component id="lbl_mmck_W" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_mmck_Lq" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_mmck_L" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="btn_mmck_calculate" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="btn_mmck_clearAll" min="-2" pref="100" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lbl_mmck_W" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_mmck_Lq" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_mmck_L" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <Component id="lbl_mmck_Wq" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -919,44 +740,52 @@
                           <Component id="txt_mmck_W" alignment="0" max="32767" attributes="0"/>
                           <Component id="txt_mmck_Wq" alignment="0" pref="100" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl_mmck_arrival" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmck_arrival" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_mmck_L" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmck_L" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbl_mmck_arrival" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_mmck_arrival" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_mmck_L" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_mmck_L" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbl_mmck_service" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_mmck_service" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_mmck_Lq" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_mmck_Lq" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_mmck_calculate" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbl_mmck_servers" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_mmck_servers" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_mmck_W" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_mmck_W" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_mmck_clearAll" min="-2" pref="45" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl_mmck_service" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmck_service" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_mmck_Lq" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmck_Lq" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl_mmck_servers" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmck_servers" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_mmck_W" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_mmck_W" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lbl_mmck_capacity" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_mmck_capacity" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_mmck_Wq" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_mmck_Wq" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                      <Component id="btn_mmck_calculate" min="-2" pref="45" max="-2" attributes="0"/>
-                      <EmptySpace pref="80" max="32767" attributes="0"/>
+                      <EmptySpace pref="191" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1048,6 +877,204 @@
             <Component class="javax.swing.JTextField" name="txt_mmck_Wq">
               <Events>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmck_WqKeyReleased"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_mmck_clearAll">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Clear all"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_mmck_clearAllMouseClicked"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="panel_MMC">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="M/M/C">
+                <Property name="tabTitle" type="java.lang.String" value="M/M/C"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="lbl_mmc_arrival" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_mmc_service" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbl_mmc_servers" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btn_mmc_calculate" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txt_mmc_servers" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txt_mmc_arrival" max="32767" attributes="0"/>
+                              <Component id="txt_mmc_service" pref="100" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="btn_mmc_clearAll" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="157" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="lbl_mmc_Lq" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_mmc_L" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lbl_mmc_W" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_mmc_Wq" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txt_mmc_Wq" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="txt_mmc_Lq" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="txt_mmc_W" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="txt_mmc_L" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lbl_mmc_arrival" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_mmc_arrival" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_mmc_L" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_mmc_L" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txt_mmc_service" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_mmc_Lq" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_mmc_Lq" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lbl_mmc_service" min="-2" pref="45" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbl_mmc_W" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_mmc_W" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="lbl_mmc_servers" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_mmc_servers" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lbl_mmc_Wq" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_mmc_Wq" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_mmc_calculate" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="btn_mmc_clearAll" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="206" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lbl_mmc_arrival">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Mean arrival rate:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_mmc_arrival">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmc_arrivalKeyReleased"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl_mmc_service">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Mean service rate:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_mmc_service">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmc_serviceKeyReleased"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_mmc_calculate">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Calculate"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_mmc_calculateMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl_mmc_L">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Number of people in the system (L):"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl_mmc_Lq">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Number of people in the queue (Lq):"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl_mmc_W">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Expected wait time in the system (W):"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl_mmc_Wq">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Expected wait time in the queue (Wq):"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_mmc_L">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmc_LKeyReleased"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_mmc_Lq">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmc_LqKeyReleased"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_mmc_W">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmc_WKeyReleased"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_mmc_Wq">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_mmc_WqKeyReleased"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl_mmc_servers">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Servers:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_mmc_servers">
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_mmc_clearAll">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Clear all"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_mmc_clearAllMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>

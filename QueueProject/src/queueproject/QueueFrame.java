@@ -24,7 +24,24 @@ import org.jfree.data.xy.XYSeriesCollection;
  * @author mazen
  */
 public class QueueFrame extends javax.swing.JFrame {
-
+    double arrival_time;
+    double service_time;
+    double arrival_rate;
+    double service_rate;
+    int time;
+    int K;
+    int M;
+    int N;
+    int pplAtTime;
+    int qWaitTime;
+    int qWaitTime_M;
+    int first_balk_time;
+    double general_balk_time;
+    // ---------------------------------------------------------
+    double L,Lq,W,Wq;
+    double rho;
+    double p0;
+    double pk;
     /**
      * Creates new form QueueFrame
      */
@@ -61,12 +78,11 @@ public class QueueFrame extends javax.swing.JFrame {
         txt_initialCustomers = new javax.swing.JTextField();
         lbl_customerNumber = new javax.swing.JLabel();
         txt_customerNumber = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         lbl_qWaitTime_M = new javax.swing.JLabel();
         txt_qWaitTime_M = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        lbl_balkTime = new javax.swing.JLabel();
         txt_balkTime = new javax.swing.JTextField();
+        btn_clearAll = new javax.swing.JButton();
         panel_MM1 = new javax.swing.JPanel();
         lbl_mm1_arrival = new javax.swing.JLabel();
         txt_mm1_arrival = new javax.swing.JTextField();
@@ -81,6 +97,7 @@ public class QueueFrame extends javax.swing.JFrame {
         txt_mm1_W = new javax.swing.JTextField();
         lbl_mm1_Wq = new javax.swing.JLabel();
         txt_mm1_Wq = new javax.swing.JTextField();
+        btn_mm1_clearAll = new javax.swing.JButton();
         panel_MM1K = new javax.swing.JPanel();
         lbl_mm1k_arrival = new javax.swing.JLabel();
         txt_mm1k_arrival = new javax.swing.JTextField();
@@ -95,24 +112,9 @@ public class QueueFrame extends javax.swing.JFrame {
         txt_mm1k_Lq = new javax.swing.JTextField();
         lbl_mm1k_W = new javax.swing.JLabel();
         txt_mm1k_W = new javax.swing.JTextField();
-        Wq = new javax.swing.JLabel();
+        lbl_mm1k_Wq = new javax.swing.JLabel();
         txt_mm1k_Wq = new javax.swing.JTextField();
-        panel_MMC = new javax.swing.JPanel();
-        lbl_mmc_arrival = new javax.swing.JLabel();
-        txt_mmc_arrival = new javax.swing.JTextField();
-        lbl_mmc_service = new javax.swing.JLabel();
-        txt_mmc_service = new javax.swing.JTextField();
-        btn_mmc_calculate = new javax.swing.JButton();
-        lbl_mmc_L = new javax.swing.JLabel();
-        lbl_mmc_Lq = new javax.swing.JLabel();
-        lbl_mmc_W = new javax.swing.JLabel();
-        lbl_mmc_Wq = new javax.swing.JLabel();
-        txt_mmc_L = new javax.swing.JTextField();
-        txt_mmc_Lq = new javax.swing.JTextField();
-        txt_mmc_W = new javax.swing.JTextField();
-        txt_mmc_Wq = new javax.swing.JTextField();
-        lbl_mmc_servers = new javax.swing.JLabel();
-        txt_mmc_servers = new javax.swing.JTextField();
+        btn_mm1k_clearAll = new javax.swing.JButton();
         panel_MMCK = new javax.swing.JPanel();
         lbl_mmck_arrival = new javax.swing.JLabel();
         lbl_mmck_service = new javax.swing.JLabel();
@@ -131,6 +133,24 @@ public class QueueFrame extends javax.swing.JFrame {
         txt_mmck_Lq = new javax.swing.JTextField();
         txt_mmck_W = new javax.swing.JTextField();
         txt_mmck_Wq = new javax.swing.JTextField();
+        btn_mmck_clearAll = new javax.swing.JButton();
+        panel_MMC = new javax.swing.JPanel();
+        lbl_mmc_arrival = new javax.swing.JLabel();
+        txt_mmc_arrival = new javax.swing.JTextField();
+        lbl_mmc_service = new javax.swing.JLabel();
+        txt_mmc_service = new javax.swing.JTextField();
+        btn_mmc_calculate = new javax.swing.JButton();
+        lbl_mmc_L = new javax.swing.JLabel();
+        lbl_mmc_Lq = new javax.swing.JLabel();
+        lbl_mmc_W = new javax.swing.JLabel();
+        lbl_mmc_Wq = new javax.swing.JLabel();
+        txt_mmc_L = new javax.swing.JTextField();
+        txt_mmc_Lq = new javax.swing.JTextField();
+        txt_mmc_W = new javax.swing.JTextField();
+        txt_mmc_Wq = new javax.swing.JTextField();
+        lbl_mmc_servers = new javax.swing.JLabel();
+        txt_mmc_servers = new javax.swing.JTextField();
+        btn_mmc_clearAll = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -180,6 +200,11 @@ public class QueueFrame extends javax.swing.JFrame {
                 btn_graphMouseClicked(evt);
             }
         });
+        btn_graph.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_graphActionPerformed(evt);
+            }
+        });
 
         lbl_pplAtTime.setText("n(t) =");
 
@@ -191,6 +216,7 @@ public class QueueFrame extends javax.swing.JFrame {
 
         lbl_initialCustomers.setText("Initial customers:");
 
+        txt_initialCustomers.setText("0");
         txt_initialCustomers.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_initialCustomersKeyReleased(evt);
@@ -205,13 +231,16 @@ public class QueueFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("0 for infinite capacity");
-
-        jLabel2.setText("0 if none");
-
         lbl_qWaitTime_M.setText("Wq(M)=");
 
-        jLabel3.setText("ti =");
+        lbl_balkTime.setText("Balk time =");
+
+        btn_clearAll.setText("Clear all");
+        btn_clearAll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_clearAllMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_DD1KLayout = new javax.swing.GroupLayout(panel_DD1K);
         panel_DD1K.setLayout(panel_DD1KLayout);
@@ -220,60 +249,46 @@ public class QueueFrame extends javax.swing.JFrame {
             .addGroup(panel_DD1KLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_DD1KLayout.createSequentialGroup()
-                        .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_DD1KLayout.createSequentialGroup()
+                    .addComponent(lbl_customerNumber)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_DD1KLayout.createSequentialGroup()
+                        .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_DD1KLayout.createSequentialGroup()
                                 .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_arrival)
                                     .addComponent(lbl_service))
-                                .addGap(35, 35, 35)
-                                .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txt_service, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_arrival, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_DD1KLayout.createSequentialGroup()
+                                .addGap(217, 217, 217)
+                                .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btn_calculate, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                                    .addComponent(btn_graph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_clearAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lbl_initialCustomers)
+                            .addGroup(panel_DD1KLayout.createSequentialGroup()
                                 .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_capacity)
                                     .addComponent(lbl_time))
-                                .addGap(59, 59, 59)
+                                .addGap(75, 75, 75)
                                 .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_time, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_capacity, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panel_DD1KLayout.createSequentialGroup()
-                                .addGap(296, 296, 296)
-                                .addComponent(lbl_pplAtTime))
-                            .addGroup(panel_DD1KLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel1))
-                            .addGroup(panel_DD1KLayout.createSequentialGroup()
-                                .addGap(115, 115, 115)
-                                .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btn_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_DD1KLayout.createSequentialGroup()
-                                        .addComponent(btn_graph, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(lbl_qWaitTime_M, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(lbl_qWaitTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
-                    .addGroup(panel_DD1KLayout.createSequentialGroup()
+                                    .addComponent(txt_initialCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_customerNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txt_service, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_capacity, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_arrival, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_time, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                         .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_initialCustomers)
-                            .addComponent(lbl_customerNumber))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_initialCustomers, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                            .addComponent(txt_customerNumber))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)))
+                            .addComponent(lbl_balkTime)
+                            .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lbl_qWaitTime_M, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_qWaitTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lbl_pplAtTime))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txt_pplAtTime, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(txt_qWaitTime, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(txt_qWaitTime_M)
                     .addComponent(txt_balkTime))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         panel_DD1KLayout.setVerticalGroup(
             panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,36 +310,33 @@ public class QueueFrame extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_capacity)
-                            .addComponent(txt_capacity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
+                            .addComponent(txt_capacity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panel_DD1KLayout.createSequentialGroup()
-                        .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panel_DD1KLayout.createSequentialGroup()
-                                .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbl_pplAtTime)
-                                    .addComponent(txt_pplAtTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(51, 51, 51)
-                                .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbl_qWaitTime_M)
-                                    .addComponent(txt_qWaitTime_M, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(51, 51, 51))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_DD1KLayout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(btn_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(btn_graph, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_pplAtTime)
+                            .addComponent(txt_pplAtTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(51, 51, 51)
+                        .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_qWaitTime_M)
+                            .addComponent(txt_qWaitTime_M, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(51, 51, 51)
                         .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_qWaitTime)
                             .addComponent(txt_qWaitTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)))
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_DD1KLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(btn_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_graph, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_clearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_DD1KLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_initialCustomers)
-                            .addComponent(txt_initialCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(txt_initialCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
                         .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_customerNumber)
@@ -332,7 +344,7 @@ public class QueueFrame extends javax.swing.JFrame {
                     .addGroup(panel_DD1KLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(panel_DD1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
+                            .addComponent(lbl_balkTime)
                             .addComponent(txt_balkTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
@@ -408,37 +420,47 @@ public class QueueFrame extends javax.swing.JFrame {
             }
         });
 
+        btn_mm1_clearAll.setText("Clear all");
+        btn_mm1_clearAll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_mm1_clearAllMouseClicked(evt);
+            }
+        });
+        btn_mm1_clearAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_mm1_clearAllActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_MM1Layout = new javax.swing.GroupLayout(panel_MM1);
         panel_MM1.setLayout(panel_MM1Layout);
         panel_MM1Layout.setHorizontalGroup(
             panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_MM1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_mm1_service)
+                    .addComponent(lbl_mm1_arrival)
+                    .addComponent(btn_mm1_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_MM1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_mm1_service)
-                            .addComponent(lbl_mm1_arrival))
-                        .addGap(18, 18, 18)
-                        .addGroup(panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_mm1_arrival, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-                            .addComponent(txt_mm1_service)))
-                    .addGroup(panel_MM1Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(btn_mm1_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(98, 98, 98)
+                    .addGroup(panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txt_mm1_arrival, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                        .addComponent(txt_mm1_service))
+                    .addComponent(btn_mm1_clearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_mm1_Lq)
                     .addComponent(lbl_mm1_L)
                     .addComponent(lbl_mm1_W)
                     .addComponent(lbl_mm1_Wq))
                 .addGap(41, 41, 41)
-                .addGroup(panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_mm1_L, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_mm1_W, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_mm1_Lq, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_mm1_Wq, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt_mm1_W, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(txt_mm1_Wq)
+                    .addComponent(txt_mm1_Lq)
+                    .addComponent(txt_mm1_L))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         panel_MM1Layout.setVerticalGroup(
             panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,18 +479,21 @@ public class QueueFrame extends javax.swing.JFrame {
                     .addComponent(txt_mm1_Lq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_MM1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(btn_mm1_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_MM1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_mm1_W)
-                            .addComponent(txt_mm1_W, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txt_mm1_W, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_MM1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_mm1_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_mm1_clearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(2, 2, 2)
                 .addGroup(panel_MM1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_mm1_Wq)
                     .addComponent(txt_mm1_Wq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         queue_Switch.addTab("M/M/1", panel_MM1);
@@ -501,6 +526,11 @@ public class QueueFrame extends javax.swing.JFrame {
         btn_mm1k_calculate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_mm1k_calculateMouseClicked(evt);
+            }
+        });
+        btn_mm1k_calculate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_mm1k_calculateActionPerformed(evt);
             }
         });
 
@@ -541,7 +571,7 @@ public class QueueFrame extends javax.swing.JFrame {
             }
         });
 
-        Wq.setText("Expected wait time in the queue (Wq):");
+        lbl_mm1k_Wq.setText("Expected wait time in the queue (Wq):");
 
         txt_mm1k_Wq.setFocusable(false);
         txt_mm1k_Wq.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -550,14 +580,21 @@ public class QueueFrame extends javax.swing.JFrame {
             }
         });
 
+        btn_mm1k_clearAll.setText("Clear all");
+        btn_mm1k_clearAll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_mm1k_clearAllMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_MM1KLayout = new javax.swing.GroupLayout(panel_MM1K);
         panel_MM1K.setLayout(panel_MM1KLayout);
         panel_MM1KLayout.setHorizontalGroup(
             panel_MM1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_MM1KLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(panel_MM1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_MM1KLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addGroup(panel_MM1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_mm1k_service, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_mm1k_capacity, javax.swing.GroupLayout.Alignment.LEADING)
@@ -568,21 +605,22 @@ public class QueueFrame extends javax.swing.JFrame {
                             .addComponent(txt_mm1k_service)
                             .addComponent(txt_mm1k_capacity, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
                     .addGroup(panel_MM1KLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(btn_mm1k_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(110, 110, 110)
+                        .addComponent(btn_mm1k_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_mm1k_clearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(104, 104, 104)
                 .addGroup(panel_MM1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_mm1k_L)
                     .addComponent(lbl_mm1k_Lq)
                     .addComponent(lbl_mm1k_W)
-                    .addComponent(Wq))
+                    .addComponent(lbl_mm1k_Wq))
                 .addGap(22, 22, 22)
                 .addGroup(panel_MM1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_mm1k_W, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(txt_mm1k_Lq, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_mm1k_W, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                     .addComponent(txt_mm1k_L)
+                    .addComponent(txt_mm1k_Lq, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_mm1k_Wq))
-                .addGap(65, 65, 65))
+                .addContainerGap())
         );
         panel_MM1KLayout.setVerticalGroup(
             panel_MM1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -608,142 +646,13 @@ public class QueueFrame extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addGroup(panel_MM1KLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_mm1k_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Wq)
-                    .addComponent(txt_mm1k_Wq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_mm1k_Wq)
+                    .addComponent(txt_mm1k_Wq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_mm1k_clearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(163, Short.MAX_VALUE))
         );
 
         queue_Switch.addTab("M/M/1/K", panel_MM1K);
-
-        lbl_mmc_arrival.setText("Mean arrival rate:");
-
-        txt_mmc_arrival.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_mmc_arrivalKeyReleased(evt);
-            }
-        });
-
-        lbl_mmc_service.setText("Mean service rate:");
-
-        txt_mmc_service.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_mmc_serviceKeyReleased(evt);
-            }
-        });
-
-        btn_mmc_calculate.setText("Calculate");
-        btn_mmc_calculate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_mmc_calculateMouseClicked(evt);
-            }
-        });
-
-        lbl_mmc_L.setText("Number of people in the system (L):");
-
-        lbl_mmc_Lq.setText("Number of people in the queue (Lq):");
-
-        lbl_mmc_W.setText("Expected wait time in the system (W):");
-
-        lbl_mmc_Wq.setText("Expected wait time in the queue (Wq):");
-
-        txt_mmc_L.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_mmc_LKeyReleased(evt);
-            }
-        });
-
-        txt_mmc_Lq.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_mmc_LqKeyReleased(evt);
-            }
-        });
-
-        txt_mmc_W.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_mmc_WKeyReleased(evt);
-            }
-        });
-
-        txt_mmc_Wq.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_mmc_WqKeyReleased(evt);
-            }
-        });
-
-        lbl_mmc_servers.setText("Servers:");
-
-        javax.swing.GroupLayout panel_MMCLayout = new javax.swing.GroupLayout(panel_MMC);
-        panel_MMC.setLayout(panel_MMCLayout);
-        panel_MMCLayout.setHorizontalGroup(
-            panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_MMCLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(panel_MMCLayout.createSequentialGroup()
-                        .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_mmc_service)
-                            .addComponent(lbl_mmc_arrival))
-                        .addGap(18, 18, 18)
-                        .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_mmc_arrival)
-                            .addComponent(txt_mmc_service, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                        .addGap(111, 111, 111)
-                        .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_mmc_Lq)
-                            .addComponent(lbl_mmc_L))
-                        .addGap(7, 7, 7))
-                    .addGroup(panel_MMCLayout.createSequentialGroup()
-                        .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_MMCLayout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addComponent(btn_mmc_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(panel_MMCLayout.createSequentialGroup()
-                                .addComponent(lbl_mmc_servers)
-                                .addGap(76, 76, 76)
-                                .addComponent(txt_mmc_servers)
-                                .addGap(109, 109, 109)))
-                        .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_mmc_W)
-                            .addComponent(lbl_mmc_Wq))))
-                .addGap(25, 25, 25)
-                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_mmc_L)
-                    .addComponent(txt_mmc_Lq)
-                    .addComponent(txt_mmc_W)
-                    .addComponent(txt_mmc_Wq, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                .addContainerGap(128, Short.MAX_VALUE))
-        );
-        panel_MMCLayout.setVerticalGroup(
-            panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_MMCLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_mmc_arrival)
-                    .addComponent(txt_mmc_arrival, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_mmc_L)
-                    .addComponent(txt_mmc_L, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_mmc_service)
-                    .addComponent(txt_mmc_service, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_mmc_Lq)
-                    .addComponent(txt_mmc_Lq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_mmc_W)
-                    .addComponent(txt_mmc_W, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_mmc_servers)
-                    .addComponent(txt_mmc_servers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_mmc_Wq)
-                    .addComponent(txt_mmc_Wq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_mmc_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(193, Short.MAX_VALUE))
-        );
-
-        queue_Switch.addTab("M/M/C", panel_MMC);
 
         lbl_mmck_arrival.setText("Mean arrival rate:");
 
@@ -816,14 +725,17 @@ public class QueueFrame extends javax.swing.JFrame {
             }
         });
 
+        btn_mmck_clearAll.setText("Clear all");
+        btn_mmck_clearAll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_mmck_clearAllMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_MMCKLayout = new javax.swing.GroupLayout(panel_MMCK);
         panel_MMCK.setLayout(panel_MMCKLayout);
         panel_MMCKLayout.setHorizontalGroup(
             panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_MMCKLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(btn_mmck_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panel_MMCKLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -837,12 +749,17 @@ public class QueueFrame extends javax.swing.JFrame {
                     .addComponent(txt_mmck_servers)
                     .addComponent(txt_mmck_service)
                     .addComponent(txt_mmck_arrival))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbl_mmck_W)
-                        .addComponent(lbl_mmck_Lq)
-                        .addComponent(lbl_mmck_L))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_MMCKLayout.createSequentialGroup()
+                        .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_mmck_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_mmck_clearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_mmck_W)
+                            .addComponent(lbl_mmck_Lq)
+                            .addComponent(lbl_mmck_L)))
                     .addComponent(lbl_mmck_Wq, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -850,41 +767,186 @@ public class QueueFrame extends javax.swing.JFrame {
                     .addComponent(txt_mmck_Lq)
                     .addComponent(txt_mmck_W)
                     .addComponent(txt_mmck_Wq, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                .addGap(83, 83, 83))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_MMCKLayout.setVerticalGroup(
             panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_MMCKLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_mmck_arrival)
-                    .addComponent(txt_mmck_arrival, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_mmck_L)
-                    .addComponent(txt_mmck_L, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_mmck_service)
-                    .addComponent(txt_mmck_service, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_mmck_Lq)
-                    .addComponent(txt_mmck_Lq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_mmck_servers)
-                    .addComponent(txt_mmck_servers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_mmck_W)
-                    .addComponent(txt_mmck_W, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_MMCKLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_mmck_arrival)
+                            .addComponent(txt_mmck_arrival, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_mmck_L)
+                            .addComponent(txt_mmck_L, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_mmck_service)
+                            .addComponent(txt_mmck_service, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_mmck_Lq)
+                            .addComponent(txt_mmck_Lq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_mmck_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_mmck_servers)
+                            .addComponent(txt_mmck_servers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_mmck_W)
+                            .addComponent(txt_mmck_W, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_MMCKLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_mmck_clearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(panel_MMCKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_mmck_capacity)
                     .addComponent(txt_mmck_capacity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_mmck_Wq)
                     .addComponent(txt_mmck_Wq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66)
-                .addComponent(btn_mmck_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         queue_Switch.addTab("M/M/C/K", panel_MMCK);
+
+        lbl_mmc_arrival.setText("Mean arrival rate:");
+
+        txt_mmc_arrival.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_mmc_arrivalKeyReleased(evt);
+            }
+        });
+
+        lbl_mmc_service.setText("Mean service rate:");
+
+        txt_mmc_service.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_mmc_serviceKeyReleased(evt);
+            }
+        });
+
+        btn_mmc_calculate.setText("Calculate");
+        btn_mmc_calculate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_mmc_calculateMouseClicked(evt);
+            }
+        });
+
+        lbl_mmc_L.setText("Number of people in the system (L):");
+
+        lbl_mmc_Lq.setText("Number of people in the queue (Lq):");
+
+        lbl_mmc_W.setText("Expected wait time in the system (W):");
+
+        lbl_mmc_Wq.setText("Expected wait time in the queue (Wq):");
+
+        txt_mmc_L.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_mmc_LKeyReleased(evt);
+            }
+        });
+
+        txt_mmc_Lq.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_mmc_LqKeyReleased(evt);
+            }
+        });
+
+        txt_mmc_W.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_mmc_WKeyReleased(evt);
+            }
+        });
+
+        txt_mmc_Wq.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_mmc_WqKeyReleased(evt);
+            }
+        });
+
+        lbl_mmc_servers.setText("Servers:");
+
+        btn_mmc_clearAll.setText("Clear all");
+        btn_mmc_clearAll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_mmc_clearAllMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_MMCLayout = new javax.swing.GroupLayout(panel_MMC);
+        panel_MMC.setLayout(panel_MMCLayout);
+        panel_MMCLayout.setHorizontalGroup(
+            panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_MMCLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(panel_MMCLayout.createSequentialGroup()
+                            .addComponent(lbl_mmc_arrival)
+                            .addGap(22, 22, 22))
+                        .addGroup(panel_MMCLayout.createSequentialGroup()
+                            .addComponent(lbl_mmc_service)
+                            .addGap(18, 18, 18)))
+                    .addGroup(panel_MMCLayout.createSequentialGroup()
+                        .addComponent(lbl_mmc_servers)
+                        .addGap(76, 76, 76))
+                    .addComponent(btn_mmc_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_mmc_servers, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txt_mmc_arrival)
+                        .addComponent(txt_mmc_service, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addComponent(btn_mmc_clearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lbl_mmc_Lq)
+                        .addComponent(lbl_mmc_L))
+                    .addComponent(lbl_mmc_W)
+                    .addComponent(lbl_mmc_Wq))
+                .addGap(18, 18, 18)
+                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_mmc_Wq, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txt_mmc_Lq, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_mmc_W, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_mmc_L, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panel_MMCLayout.setVerticalGroup(
+            panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_MMCLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_mmc_arrival)
+                    .addComponent(txt_mmc_arrival, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_mmc_L)
+                    .addComponent(txt_mmc_L, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_mmc_service, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_mmc_Lq)
+                    .addComponent(txt_mmc_Lq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_MMCLayout.createSequentialGroup()
+                        .addComponent(lbl_mmc_service, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
+                .addGap(22, 22, 22)
+                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbl_mmc_W)
+                        .addComponent(txt_mmc_W, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbl_mmc_servers)
+                        .addComponent(txt_mmc_servers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32)
+                .addGroup(panel_MMCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_mmc_Wq)
+                    .addComponent(txt_mmc_Wq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_mmc_calculate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_mmc_clearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(206, Short.MAX_VALUE))
+        );
+
+        queue_Switch.addTab("M/M/C", panel_MMC);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -905,25 +967,23 @@ public class QueueFrame extends javax.swing.JFrame {
 //  MU >= LAMBDA  >>>>> DONE     Service rate is "Mu"        Service time is "1/Mu"
     private void btn_calculateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_calculateMouseClicked
         try {
-            ScriptEngineManager arithmetic = new ScriptEngineManager();
-            ScriptEngine arithmetic_engine = arithmetic.getEngineByName("JavaScript");
             
-            double arrival_time= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_arrival.getText())));
-            double service_time= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_service.getText())));
-            double arrival_rate= (double) 1/arrival_time;
-            double service_rate= (double) 1/service_time;
-            int time= Integer.valueOf(String.valueOf(arithmetic_engine.eval(txt_time.getText())));
-            int pplAtTime=0;
-            int qWaitTime;
-            int first_balk_time=0;
-            int capacity= Integer.valueOf(String.valueOf(arithmetic_engine.eval(txt_capacity.getText())));
-            int M= Integer.valueOf(String.valueOf(arithmetic_engine.eval(txt_initialCustomers.getText())));
-            int N= Integer.valueOf(String.valueOf(arithmetic_engine.eval(txt_customerNumber.getText())));
-            int qWaitTime_M;
-            double general_balk_time= (-(service_rate / arrival_rate) + capacity) / (arrival_rate - service_rate);
+            arrival_time= arithmetic_double(txt_arrival.getText());
+            service_time= arithmetic_double(txt_service.getText());
+            arrival_rate= (double) 1/arrival_time;
+            service_rate= (double) 1/service_time;
+            time= arithmetic_int(txt_time.getText());
+            pplAtTime=0;
+           
+            first_balk_time=0;
+            K=  arithmetic_int(txt_capacity.getText());
+            M= arithmetic_int(txt_initialCustomers.getText());
+            N= arithmetic_int(txt_customerNumber.getText());
+            
+            double general_balk_time= (-(service_rate / arrival_rate) + K) / (arrival_rate - service_rate);
             boolean special_case=false;
             
-            if(M > capacity){
+            if(M > K){
             javax.swing.JOptionPane.showMessageDialog(rootPane, "Initial customers can't be greater than system capacity!", "WARNING!", HEIGHT);
             return;
             }
@@ -938,7 +998,7 @@ public class QueueFrame extends javax.swing.JFrame {
             while(true){
                 if( Math.floor(arrival_rate * general_balk_time) - 
                         Math.floor((BigDecimal.valueOf((service_rate * general_balk_time) - 
-                                (service_rate / arrival_rate)).setScale(6, RoundingMode.HALF_UP)).doubleValue())  == capacity){
+                                (service_rate / arrival_rate)).setScale(6, RoundingMode.HALF_UP)).doubleValue())  == K){
                     general_balk_time-=arrival_time;
                     continue;
                 }
@@ -953,7 +1013,7 @@ public class QueueFrame extends javax.swing.JFrame {
             
             if(special_case == true){
                 if(time >= first_balk_time){
-                    pplAtTime= capacity-1;
+                    pplAtTime= K-1;
                     qWaitTime= (int) ((service_time -  arrival_time)*((arrival_rate * first_balk_time) - 2)) ;
                     txt_pplAtTime.setText("" + pplAtTime);
                     txt_qWaitTime.setText("" + qWaitTime);
@@ -970,9 +1030,9 @@ public class QueueFrame extends javax.swing.JFrame {
             }
             else if (time > first_balk_time){
                 if ((time - (.5 * (arrival_time)) - first_balk_time) % (arrival_time) == 0) {
-                    pplAtTime = capacity - 2;
+                    pplAtTime = K - 2;
                 } else {
-                    pplAtTime = capacity - 1;
+                    pplAtTime = K - 1;
                 }
                 txt_pplAtTime.setText("" + pplAtTime);
             }
@@ -1100,26 +1160,25 @@ public class QueueFrame extends javax.swing.JFrame {
         XYSeries series= new XYSeries("People at time");
         
         try{
-            ScriptEngineManager arithmetic = new ScriptEngineManager();
-            ScriptEngine arithmetic_engine = arithmetic.getEngineByName("JavaScript");
-            int capacity= Integer.valueOf(String.valueOf(arithmetic_engine.eval(txt_capacity.getText())));
-            double arrival_time= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_arrival.getText())));
-            double service_time= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_service.getText())));
-            int M= Integer.valueOf(String.valueOf(arithmetic_engine.eval(txt_initialCustomers.getText())));
+            
+             K= arithmetic_int(txt_capacity.getText());
+             arrival_time= arithmetic_double(txt_arrival.getText());
+             service_time= arithmetic_double(txt_service.getText());
+             M= arithmetic_int((txt_initialCustomers.getText()));
             
             
             // Case 1: (System is unstable)
             if(arrival_time < service_time){
             for(int i=0; i<=80; i++){
-            if(getPPLCountAtTime(i) < capacity && getPPLCountAtTime(i) >= 0){
-                series.add(i,getPPLCountAtTime(i));
+            if(get_nt_dd1k(i) < K && get_nt_dd1k(i) >= 0){
+                series.add(i,get_nt_dd1k(i));
         }
             else{
-                int j=i; // j is the last time period that had a value n(t) < capacity
-                while(getPPLCountAtTime(j) >= capacity || getPPLCountAtTime(j) < 0){    
+                int j=i; // j is the last time period that had a value n(t) < K
+                while(get_nt_dd1k(j) >= K || get_nt_dd1k(j) < 0){    
                 j=j-1;
                 }
-                series.add(i,getPPLCountAtTime(j));
+                series.add(i,get_nt_dd1k(j));
             }
         }
             }
@@ -1134,15 +1193,15 @@ public class QueueFrame extends javax.swing.JFrame {
                 
               while(i <= 50){
                   
-            if(getPPLCountAtTime(i) >= 0){
-                series.add(i,getPPLCountAtTime(i));
+            if(get_nt_dd1k(i) >= 0){
+                series.add(i,get_nt_dd1k(i));
         }
             else{
                 int j=i; // j is the last time period that had a value n(t) > 0
-                while(getPPLCountAtTime(j) < 0){    
+                while(get_nt_dd1k(j) < 0){    
                 j=j-1;
                 }
-                series.add(i,getPPLCountAtTime(j));
+                series.add(i,get_nt_dd1k(j));
             }
             i++;
         }
@@ -1179,13 +1238,13 @@ public class QueueFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_mm1_calculateActionPerformed
 
     private void btn_mm1_calculateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mm1_calculateMouseClicked
-        ScriptEngineManager arithmetic= new ScriptEngineManager();
-        ScriptEngine arithmetic_engine= arithmetic.getEngineByName("JavaScript");
+        
         try{
-        double arrival_rate= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_mm1_arrival.getText())));
-        double service_rate= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_mm1_service.getText())));
-        double L,Lq,W,Wq;
-        double rho= arrival_rate/service_rate;
+        arrival_rate= arithmetic_double(txt_mm1_arrival.getText());
+       
+        service_rate= arithmetic_double(txt_mm1_service.getText());
+         
+        
         
         L= Math.rint((arrival_rate)/(service_rate-arrival_rate));
         Lq= Math.rint(Math.pow(arrival_rate,2)/(service_rate*(service_rate-arrival_rate)));
@@ -1281,23 +1340,22 @@ public class QueueFrame extends javax.swing.JFrame {
 
     private void btn_mm1k_calculateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mm1k_calculateMouseClicked
         try {
-            ScriptEngineManager arithmetic= new ScriptEngineManager();
-            ScriptEngine arithmetic_engine= arithmetic.getEngineByName("JavaScript");
-            double arrival_rate= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_mm1k_arrival.getText())));
-            double service_rate= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_mm1k_service.getText())));
-            double capacity= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_mm1k_capacity.getText())));
-            double L=0,Lq,W,Wq;
-            double rho= arrival_rate/service_rate;
-            double p0= (1-rho)/(1-Math.pow(rho,(capacity+1)));
-            double pk=0;
+            
+            arrival_rate= arithmetic_double(txt_mm1k_arrival.getText());
+            service_rate= arithmetic_double(txt_mm1k_service.getText());
+            K= arithmetic_int(txt_mm1k_capacity.getText());
+            L=0;
+             rho= arrival_rate/service_rate;
+             p0= (1-rho)/(1-Math.pow(rho,(K+1)));
+             pk=0;
             if (rho != 1){
-                pk= Math.pow(rho, capacity)*p0;
-                L=(rho*(  (1-(capacity+1)*Math.pow(rho,capacity)  +  (capacity * Math.pow(rho,(capacity+1))))  /
-                        ((1-rho)*(1-Math.pow(rho,(capacity+1))))));
+                pk= Math.pow(rho, K)*p0;
+                L=(rho*(  (1-(K+1)*Math.pow(rho,K)  +  (K * Math.pow(rho,(K+1))))  /
+                        ((1-rho)*(1-Math.pow(rho,(K+1))))));
             }
                 else if(rho == 1){
-                    pk=(1/(capacity+1));
-                    L= capacity/2;
+                    pk=(1/(K+1));
+                    L= K/2;
              }
             
             W= L/(arrival_rate*(1-pk));
@@ -1346,15 +1404,15 @@ public class QueueFrame extends javax.swing.JFrame {
 
     private void btn_mmc_calculateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mmc_calculateMouseClicked
         try {
-            ScriptEngineManager arithmetic= new ScriptEngineManager();
-            ScriptEngine arithmetic_engine= arithmetic.getEngineByName("JavaScript");
-            double arrival_rate= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_mmc_arrival.getText())));
-            double service_rate= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_mmc_service.getText())));
-            int c= Integer.valueOf(String.valueOf(arithmetic_engine.eval(txt_mmc_servers.getText())));
+            
+            arrival_rate= arithmetic_double(txt_mmc_arrival.getText());
+            service_rate= arithmetic_double(txt_mmc_service.getText());
+            int c= arithmetic_int(txt_mmc_servers.getText());
             double r= arrival_rate/service_rate;
-            double L,Lq,W,Wq;
-            double rho= r/c;
-            double summation=0,term_2nd=0,p0=0;
+            
+             rho= r/c;
+            double summation=0,term_2nd;
+            p0=0;
 
             if (rho >= 1){
                 for (int n=0; n<=(c-1); n++){
@@ -1430,23 +1488,21 @@ public class QueueFrame extends javax.swing.JFrame {
 
     private void btn_mmck_calculateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mmck_calculateMouseClicked
         try {
-            ScriptEngineManager arithmetic= new ScriptEngineManager();
-            ScriptEngine arithmetic_engine= arithmetic.getEngineByName("JavaScript");
-            double arrival_rate= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_mmck_arrival.getText())));
-            double service_rate= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_mmck_service.getText())));
-            int c= Integer.valueOf(String.valueOf(arithmetic_engine.eval(txt_mmck_servers.getText())));
-            int k= Integer.valueOf(String.valueOf(arithmetic_engine.eval(txt_mmck_capacity.getText())));
+            
+            arrival_rate= arithmetic_double(txt_mmck_arrival.getText());
+            service_rate= arithmetic_double(txt_mmck_service.getText());
+            int c= arithmetic_int(txt_mmck_servers.getText());
+            K= arithmetic_int(txt_mmck_capacity.getText());
             double r= arrival_rate/service_rate;
-            double rho= r/c;
-            double L,Lq,W,Wq;
-            double p0=0,pk;
+            rho= r/c;
+             p0=0;
             double term_2nd,summation=0;
             
             if (rho != 1){
                 for (int n=0; n<=(c-1); n++){
                     summation= summation + (Math.pow(r, n) / factorial(n));
             }
-                term_2nd= ( (Math.pow(r, c) / factorial(c)) * ( (1-Math.pow(rho, (k-c+1))) / (1-rho) ));
+                term_2nd= ( (Math.pow(r, c) / factorial(c)) * ( (1-Math.pow(rho, (K-c+1))) / (1-rho) ));
                 p0= 1/(summation + term_2nd);
             }
             
@@ -1454,12 +1510,12 @@ public class QueueFrame extends javax.swing.JFrame {
                 for (int n=0; n<=(c-1); n++){
                     summation= summation + (Math.pow(r, n) / factorial(n));
             }
-                term_2nd= ( (Math.pow(r, c) / factorial(c)) * (k-c+1) );
+                term_2nd= ( (Math.pow(r, c) / factorial(c)) * (K-c+1) );
                 p0= 1/(summation + term_2nd);
             }
             
             Lq= ( (rho * Math.pow(r,c) * p0) / (factorial(c) * Math.pow(1-rho, 2)) *
-                    ( 1-Math.pow(rho,(k-c+1)) - ( (1-rho) * (k-c+1) * Math.pow(rho, (k-c))) ) );
+                    ( 1-Math.pow(rho,(K-c+1)) - ( (1-rho) * (K-c+1) * Math.pow(rho, (K-c))) ) );
             
             summation=0;
             
@@ -1467,7 +1523,7 @@ public class QueueFrame extends javax.swing.JFrame {
                     summation= summation + ( (c-n) *  Math.pow(r, n) / factorial(n) );
             }
             
-            pk= p0 * ((Math.pow(r,k)) / (Math.pow(c,(k-c)) * factorial(c)));
+            pk= p0 * ((Math.pow(r,K)) / (Math.pow(c,(K-c)) * factorial(c)));
             L= Lq + c - (p0 * summation);
             W= L / (arrival_rate * (1-pk));
             Wq= Lq / (arrival_rate * (1-pk));
@@ -1491,6 +1547,68 @@ public class QueueFrame extends javax.swing.JFrame {
         String input= txt_customerNumber.getText();
         verify_input(input,txt_customerNumber);
     }//GEN-LAST:event_txt_customerNumberKeyReleased
+
+    private void btn_clearAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clearAllMouseClicked
+        txt_arrival.setText("");
+        txt_service.setText("");
+        txt_capacity.setText("");
+        txt_time.setText("");
+        txt_initialCustomers.setText("0");
+        txt_customerNumber.setText("");
+        txt_pplAtTime.setText("");
+        txt_qWaitTime.setText("");
+        txt_qWaitTime_M.setText("");
+        txt_balkTime.setText("");
+    }//GEN-LAST:event_btn_clearAllMouseClicked
+
+    private void btn_mm1_clearAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mm1_clearAllMouseClicked
+       txt_mm1_arrival.setText("");
+       txt_mm1_service.setText("");
+       txt_mm1_L.setText("");
+       txt_mm1_Lq.setText("");
+       txt_mm1_W.setText("");
+       txt_mm1_Wq.setText("");
+       
+    }//GEN-LAST:event_btn_mm1_clearAllMouseClicked
+
+    private void btn_mm1k_calculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mm1k_calculateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_mm1k_calculateActionPerformed
+
+    private void btn_mm1k_clearAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mm1k_clearAllMouseClicked
+        txt_mm1k_arrival.setText("");
+        txt_mm1k_service.setText("");
+        txt_mm1k_L.setText("");
+        txt_mm1k_Lq.setText("");
+        txt_mm1k_W.setText("");
+        txt_mm1k_Wq.setText("");
+    }//GEN-LAST:event_btn_mm1k_clearAllMouseClicked
+
+    private void btn_mmc_clearAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mmc_clearAllMouseClicked
+        txt_mmc_arrival.setText("");
+        txt_mmc_service.setText("");
+        txt_mmc_L.setText("");
+        txt_mmc_Lq.setText("");
+        txt_mmc_W.setText("");
+        txt_mmc_Wq.setText("");
+    }//GEN-LAST:event_btn_mmc_clearAllMouseClicked
+
+    private void btn_mmck_clearAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mmck_clearAllMouseClicked
+        txt_mmck_arrival.setText("");
+        txt_mmck_service.setText("");
+        txt_mmck_L.setText("");
+        txt_mmck_Lq.setText("");
+        txt_mmck_W.setText("");
+        txt_mmck_Wq.setText("");
+    }//GEN-LAST:event_btn_mmck_clearAllMouseClicked
+
+    private void btn_mm1_clearAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mm1_clearAllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_mm1_clearAllActionPerformed
+
+    private void btn_graphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_graphActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_graphActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1528,17 +1646,19 @@ public class QueueFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Wq;
     private javax.swing.JButton btn_calculate;
+    private javax.swing.JButton btn_clearAll;
     private javax.swing.JButton btn_graph;
     private javax.swing.JButton btn_mm1_calculate;
+    private javax.swing.JButton btn_mm1_clearAll;
     private javax.swing.JButton btn_mm1k_calculate;
+    private javax.swing.JButton btn_mm1k_clearAll;
     private javax.swing.JButton btn_mmc_calculate;
+    private javax.swing.JButton btn_mmc_clearAll;
     private javax.swing.JButton btn_mmck_calculate;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton btn_mmck_clearAll;
     private javax.swing.JLabel lbl_arrival;
+    private javax.swing.JLabel lbl_balkTime;
     private javax.swing.JLabel lbl_capacity;
     private javax.swing.JLabel lbl_customerNumber;
     private javax.swing.JLabel lbl_initialCustomers;
@@ -1551,6 +1671,7 @@ public class QueueFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_mm1k_L;
     private javax.swing.JLabel lbl_mm1k_Lq;
     private javax.swing.JLabel lbl_mm1k_W;
+    private javax.swing.JLabel lbl_mm1k_Wq;
     private javax.swing.JLabel lbl_mm1k_arrival;
     private javax.swing.JLabel lbl_mm1k_capacity;
     private javax.swing.JLabel lbl_mm1k_service;
@@ -1621,17 +1742,22 @@ public class QueueFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     private static void verify_input(String input, javax.swing.JTextField txt_field){
+        
+        
     for(int i=0; i<input.length(); i++){
             if(
                     input.charAt(i) >= '0' && 
                     input.charAt(i) <= '9' || 
-                    input.charAt(i) == '.' || 
-                    input.charAt(i) == '/' || 
+                    input.charAt(i) == '.'  || 
+                    input.charAt(i) == '/'  || 
                     input.charAt(i) == '*' ||
-                    input.charAt(i) == '(' ||
-                    input.charAt(i) == ')' ||
+                    input.charAt(i) == '('  ||
+                    input.charAt(i) == ')'  ||
                     input.charAt(i) == '+' ||
-                    input.charAt(i) == '-'){
+                    input.charAt(i) == '-'
+                    
+                   
+                    ){
             }
             else{
             txt_field.setText(input.replace(input.charAt(i), Character.MIN_VALUE));
@@ -1639,21 +1765,20 @@ public class QueueFrame extends javax.swing.JFrame {
         
         }
     }
-    private int getPPLCountAtTime(int time) throws ScriptException{
-        ScriptEngineManager arithmetic = new ScriptEngineManager();
-        ScriptEngine arithmetic_engine = arithmetic.getEngineByName("JavaScript");
-        double arrival_time= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_arrival.getText())));
-            double service_time= Double.valueOf(String.valueOf(arithmetic_engine.eval(txt_service.getText())));
-            double arrival_rate= (double) 1/arrival_time;
-            double service_rate= (double) 1/service_time;
-            int pplAtTime=0;
+    private int get_nt_dd1k(int time) throws ScriptException{
+        
+         arrival_time= arithmetic_double(txt_arrival.getText());
+         service_time= arithmetic_double(txt_service.getText());
+         arrival_rate= (double) 1/arrival_time;
+         service_rate= (double) 1/service_time;
+         pplAtTime=0;
            // int qWaitTime;
-            int first_balk_time=0;
-            int capacity= Integer.valueOf(String.valueOf(arithmetic_engine.eval(txt_capacity.getText())));
-            int M= Integer.valueOf(String.valueOf(arithmetic_engine.eval(txt_initialCustomers.getText())));
+         first_balk_time=0;
+         K= arithmetic_int(txt_capacity.getText());
+         M= arithmetic_int(txt_initialCustomers.getText());
           //  int N= Integer.valueOf(String.valueOf(arithmetic_engine.eval(txt_customerNumber.getText())));
           //  int qWaitTime_M;
-           double general_balk_time= (-(service_rate / arrival_rate) + capacity) / (arrival_rate - service_rate);
+         general_balk_time= (-(service_rate / arrival_rate) + K) / (arrival_rate - service_rate);
         
           // Case 1: (System is unstable)
           if(arrival_time < service_time){
@@ -1663,7 +1788,7 @@ public class QueueFrame extends javax.swing.JFrame {
             while(true){
                 if( Math.floor(arrival_rate * general_balk_time) - 
                         Math.floor((BigDecimal.valueOf((service_rate * general_balk_time) - 
-                                (service_rate / arrival_rate)).setScale(6, RoundingMode.HALF_UP)).doubleValue())  == capacity){
+                                (service_rate / arrival_rate)).setScale(6, RoundingMode.HALF_UP)).doubleValue())  == K){
                     general_balk_time-=arrival_time;
                     continue;
                 }
@@ -1675,7 +1800,7 @@ public class QueueFrame extends javax.swing.JFrame {
           }
             first_balk_time= (int) general_balk_time;
             
-            System.out.println(first_balk_time);
+            
           if(arrival_time < service_time){
             if(time < arrival_time){
                 return 0;
@@ -1686,9 +1811,9 @@ public class QueueFrame extends javax.swing.JFrame {
             }
             else if (time > first_balk_time){
                 if ((time - (.5 * (arrival_time)) - first_balk_time) % (arrival_time) == 0) {
-                    pplAtTime = capacity - 2;
+                    pplAtTime = K - 2;
                 } else {
-                    pplAtTime = capacity - 1;
+                    pplAtTime = K - 1;
                 }
                 return pplAtTime;
             }
@@ -1708,6 +1833,7 @@ public class QueueFrame extends javax.swing.JFrame {
             
         return -1;
     }
+    
     private int factorial(int n){
       if (n <= 1){
           return 1;
@@ -1716,8 +1842,21 @@ public class QueueFrame extends javax.swing.JFrame {
         return n*factorial(n-1);
       }
       }
-    
-    
+    private double arithmetic_double(String equation) throws ScriptException{
+    ScriptEngineManager arithmetic= new ScriptEngineManager();
+    ScriptEngine arithmetic_engine= arithmetic.getEngineByName("JavaScript");
+    double result=Double.valueOf(String.valueOf(arithmetic_engine.eval(equation)));
+    return result;
     }
+    private int arithmetic_int(String equation) throws ScriptException{
+     ScriptEngineManager arithmetic= new ScriptEngineManager();
+    ScriptEngine arithmetic_engine= arithmetic.getEngineByName("JavaScript");
+    int result=Integer.valueOf(String.valueOf(arithmetic_engine.eval(equation)));
+    return result;
+    }
+    }
+    
+    
+   
 
 
